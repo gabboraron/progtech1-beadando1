@@ -35,4 +35,8 @@ A növényeket leíró részt követő sorban a szimuláció napjainak száma ad
     
 Javaslat:
     
-    Hozza  létre  az  absztrakt  növény  osztályt,  amelyből  az  egyes  fajták  osztályait.  A konstruktor paramétere legyen a név és a tápanyag kezdeti mennyisége.  Egy nap elteltére is vezessen  be  művelet(ek)et,  a  visszatérő  érték  adja  meg,  hogy  a  növény  milyen  módon befolyásolja a következő nap sugárzását. A befolyásolás lehet egy egész szám, ami pozitív alfa sugárzás esetén, negatív delta sugárzás esetén, nulla, ha a növény nem befolyásolja a másnapi sugárzást. A végeredmény meghatározásához kell még 2 művelet: él-e a lény, illetve a név lekérdezés.
+    Hozza  létre  az  absztrakt  növény  osztályt,  amelyből  az  egyes  fajták  osztályait.  
+    A konstruktor paramétere legyen a név és a tápanyag kezdeti mennyisége.  
+    Egy nap elteltére is vezessen  be  művelet(ek)et,  a  visszatérő  érték  adja  meg,  hogy  a  növény  milyen  módon befolyásolja a következő nap sugárzását. 
+    A befolyásolás lehet egy egész szám, ami pozitív alfa sugárzás esetén, negatív delta sugárzás esetén, nulla, ha a növény nem befolyásolja a másnapi sugárzást. 
+    A végeredmény meghatározásához kell még 2 művelet: él-e a lény, illetve a név lekérdezés.
