@@ -14,7 +14,7 @@ public class plant {
     }
     
     public void logPlant(){
-        System.out.println("LOG\tname:"+this.name+"\tnutrients:"+this.nutrients+"\talive:"+this.alive+"\tplant_type:"+this.type);
+        System.out.println("\t \t name:"+this.name+"\tnutrients:"+this.nutrients+"\talive:"+this.alive+"\tplant_type:"+this.type);
     }
 
     public void setType(plantType type) {

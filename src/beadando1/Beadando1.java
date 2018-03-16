@@ -13,8 +13,6 @@ import java.util.Vector;
  */
 public class Beadando1 {
     public static void main(String[] args) {
-        // TODO code application logic here
-        System.out.println("\u2622 Radioaktivitas jelenlegi merteke: " );
         try{
             String tmpInputName;
             Scanner sc = new Scanner(System.in); 
@@ -49,55 +47,33 @@ public class Beadando1 {
             
             while (sc.hasNextLine()){
                 tmpOpenableFileEncoding = true;
-                String currentLine = sc.nextLine();
                 
-                //
-                System.out.println("currentLine:"+currentLine);
-                //
-                
-                if(nrOfRows == 0 ){
-                    nrOfPlants = Integer.parseInt(currentLine);
-                    //plantsOfFile = new Vector();
-                    ++nrOfRows;
-                }else{
-                    String[] res1 = currentLine.split(" ");
-                    plant tmpPlant = new plant(res1[0], Integer.parseInt(res1[2]), whichType(res1[1]));
-                    tmpPlant.logPlant();
-                    //plantsOfFile.add(tmpPlant);
-                    tmpPlant = null;
-                    
-                    if(nrOfRows == nrOfPlants){
-                        nrOfDays = Integer.parseInt(sc.nextLine());
-                    } else {
+                String currentLine = "";
+                switch(nrOfRows){
+                    case 0 : 
+                        currentLine = sc.nextLine();
+                        nrOfPlants = Integer.parseInt(currentLine);
                         ++nrOfRows;
-                    }
+                        break;
+                    case 1 :                        
+                        for (int idx = 0; idx < nrOfPlants; idx++) {
+                            currentLine = sc.nextLine();
+                            //System.out.println("LOG \t \t plant:"+currentLine);
+                            String[] res1 = currentLine.split(" ");
+                            plant tmpPlant = new plant(res1[0], Integer.parseInt(res1[2]), whichType(res1[1]));
+                            //tmpPlant.logPlant();
+                            plantsOfFile.add(tmpPlant);
+                        }
+                        ++nrOfRows;
+                        break;
+                    case 2 :
+                        currentLine = sc.nextLine();
+                        nrOfDays = Integer.parseInt(currentLine);
+                        ++nrOfRows;
+                        break;
                 }
                 
-                if(sc.hasNextLine()){
-                    String nextLine = sc.nextLine();
-                    
-                    //System.out.println("currentLine\t"+currentLine);
-                    System.out.println("nextLine:"+nextLine);
-                    
-                    //String[] res1 = currentLine.split(" ");
-                    String[] res2 = nextLine.split(" ");
-                    //
-                    System.out.println("!LOG\tres2:");
-                       for (String elem : res2) {         
-                        System.out.println("elem = |" + elem+"|");
-                       }  
-                    //
-                    plant tmpPlant = new plant(res2[0], Integer.parseInt(res2[2]), whichType(res2[1]));
-                    tmpPlant.logPlant();
-                    //System.out.println("!LOG\tplantsOfFile:"+plantsOfFile);
-                    //plantsOfFile.add(tmpPlant);
-                    tmpPlant = null;
-                    System.gc();
-                    
-                    //System.out.println(Arrays.toString(res1));
-                    //System.out.println(Arrays.toString(res2));
-                    //System.out.println("-------");
-                }
+                //System.out.println("LOG \t nrOfRows:"+nrOfRows+"\t nrOfPlants:"+nrOfPlants+"\t nrOfDays:"+nrOfDays);
             }
             
             if(!tmpOpenableFileEncoding){
@@ -119,16 +95,146 @@ public class Beadando1 {
     }
     
     public static void simulate(simulationDataStructure allData){
-        System.out.println("SIMAULATE FV");
-        System.out.println("LOG \t nrOfplants: " + allData.getNrOfPlants());
-        System.out.println("LOG \t nrOfSimulationDays: " + allData.getNrOfSimulationDays());
+//        System.out.println("LOG@simulate");
+//        System.out.println("LOG \t nrOfplants: " + allData.getNrOfPlants());
+//        System.out.println("LOG \t nrOfSimulationDays: " + allData.getNrOfSimulationDays());
+//        
+//        System.out.println("LOG \t plants: \t NÉV \t TÁP \t TIPUS \t ÉL");
+//        System.out.println("----\t---------\t-----\t-----\t-------\t---");
+//        for (int idx = 0; idx <  allData.getPlants().size(); idx++) {
+//            plant plantAt = allData.getPlants().elementAt(idx);
+//            System.out.println("LOG \t \t" + plantAt.getName() +"\t"+ plantAt.getNutrients() +"\t"+ plantAt.getType() +"\t"+ plantAt.isAlive());
+//        }
+        int emission = 0;
+        int tmpAlphaEmissionClaim = 0;
+        int tmpDeltaEmissionClaim = 0;
+        boolean isAlphaEmission = false;
+        boolean isDeltaEmission = false;
+        boolean isEmissionFreeDay = true;
         
-        System.out.println("LOG \t plants: \t NÉV \t TÁP \t TIPUS \t ÉL");
-        System.out.println("----\t---------\t-----\t-----\t-------\t---");
-        for (int idx = 0; idx <  allData.getPlants().size(); idx++) {
-            plant plantAt = allData.getPlants().elementAt(idx);
-            System.out.print("LOG \t plant:\t" + plantAt.getName() +"\t"+ plantAt.getNutrients() +"\t"+ plantAt.getType() +"\t"+ plantAt.isAlive());
+        System.out.println("NAP \t \u2622 \t NÖVÉNYEK" );
+        for (int jdx = 0; jdx < allData.getNrOfSimulationDays(); jdx++ ){
+            System.out.print(jdx+1+"   \t ");
+            if(isAlphaEmission){
+                System.out.println("Alpha");
+            } else if(isDeltaEmission){
+                System.out.println("Delta");
+            } else {
+                System.out.println("NINCS");
+            }
+            
+            for (int idx = 0; idx < allData.getPlants().size(); idx++) {
+                //Ha még él a növény
+                if(allData.getPlants().elementAt(idx).isAlive()){
+                    
+                //PUFFANCS
+                if(allData.getPlants().elementAt(idx).getType().equals(plantType.PUFFANCS)){
+                    //sugárzás mentes napon a  tápanyag  eggyel  csökken
+                    if(isEmissionFreeDay){
+                        allData.getPlants().elementAt(idx).setNutrients(allData.getPlants().elementAt(idx).getNutrients() - 1);
+                    }
+
+                    //Alfa sugárzás hatására a tápanyag mennyisége kettővel nő
+                    if(isAlphaEmission){
+                        allData.getPlants().elementAt(idx).setNutrients(allData.getPlants().elementAt(idx).getNutrients() + 2);
+                    }
+
+                    //delta  sugárzás  esetén  a  tápanyag  kettővel  csökken
+                    if(isDeltaEmission){
+                        allData.getPlants().elementAt(idx).setNutrients(allData.getPlants().elementAt(idx).getNutrients() - 2);
+                    }
+
+                    //Minden esetben  10 értékben  növeli  az  alfa sugárzás  bekövetkezését
+                    tmpAlphaEmissionClaim +=10;
+
+                    //elpusztul,  ha a  tápanyag  mennyisége  10  fölé emelkedik
+                    if(allData.getPlants().elementAt(idx).getNutrients()>10){
+                        allData.getPlants().elementAt(idx).setAlive(false);
+                    }
+                    if(allData.getPlants().elementAt(idx).getNutrients() <= 0){
+                        allData.getPlants().elementAt(idx).setAlive(false);
+                    }
+                }
+
+                //DELTAFA
+                if(allData.getPlants().elementAt(idx).getType().equals(plantType.DELTAFA)){
+                    //sugárzás nélküli napon  a  tápanyag  eggyel  csökken
+                    if(isEmissionFreeDay){
+                        allData.getPlants().elementAt(idx).setNutrients(allData.getPlants().elementAt(idx).getNutrients() - 1);
+                    }
+
+                    //Alfa sugárzás hatására a tápanyag mennyisége hárommal csökken
+                    if(isAlphaEmission){
+                        allData.getPlants().elementAt(idx).setNutrients(allData.getPlants().elementAt(idx).getNutrients() - 3);
+                    }
+
+                    //delta  sugárzás  hatására  a  tápanyag  néggyel  nő
+                    if(isDeltaEmission){
+                        allData.getPlants().elementAt(idx).setNutrients(allData.getPlants().elementAt(idx).getNutrients() + 4);
+                    }
+
+                    //Ha a tápanyag mennyisége 5-nél kisebb, akkor 4 értékben növeli a delta sugárzás bekövetkezését
+                    if(allData.getPlants().elementAt(idx).getNutrients() < 5){
+                        tmpDeltaEmissionClaim +=4;
+                    }
+                    //ha 5 és 10 közé esik, akkor 1 értékben növeli a delta sugárzás bekövetkezését
+                    if((allData.getPlants().elementAt(idx).getNutrients() < 10) && (allData.getPlants().elementAt(idx).getNutrients() > 5)){
+                        tmpDeltaEmissionClaim +=1;
+                    }
+                    //ha 10-nél több, akkor nem befolyásolja a másnapi sugárzást
+
+                    if(allData.getPlants().elementAt(idx).getNutrients() <= 0){
+                        allData.getPlants().elementAt(idx).setAlive(false);
+                    }
+                }
+
+                //PARABOKOR
+                if(allData.getPlants().elementAt(idx).getType().equals(plantType.PARABOKOR)){
+                    //Akár  alfa,  akár  delta  sugárzás  hatására  a  tápanyag  mennyisége  eggyel  nő. 
+                    if(isAlphaEmission || isDeltaEmission){
+                        allData.getPlants().elementAt(idx).setNutrients(allData.getPlants().elementAt(idx).getNutrients() + 1);
+                    }
+
+                    //Sugárzásnélküli napon a tápanyag eggyel csökken
+                    if(isEmissionFreeDay){
+                        allData.getPlants().elementAt(idx).setNutrients(allData.getPlants().elementAt(idx).getNutrients() - 1);
+                    }
+                    //A másnapi sugárzást nem befolyásolja
+                    
+                    if(allData.getPlants().elementAt(idx).getNutrients() <= 0){
+                        allData.getPlants().elementAt(idx).setAlive(false);
+                    }
+                }
+
+                allData.getPlants().elementAt(idx).logPlant();
+                }
+            }
+            
+            //A másnapi  sugárzás alakulása:  
+            //ha az alfa sugárzásra beérkezett igények összege legalább hárommal meghaladja a delta sugárzás igényeinek összegét, akkor alfa sugárzás lesz;
+            //ha a delta sugárzásra igaz ugyanez, akkor delta sugárzás lesz; 
+            //ha a két igény  közti  eltérés háromnál kisebb, akkor nincs sugárzás
+            if(Math.abs(tmpAlphaEmissionClaim-tmpDeltaEmissionClaim) >= 3){
+                //System.out.println("LOG \t |A-D|>=3");
+                if(tmpAlphaEmissionClaim>tmpDeltaEmissionClaim){
+                    //System.out.println("LOG \t A");
+                    isAlphaEmission = true;
+                    isEmissionFreeDay = false;
+                    isDeltaEmission = false;
+                } else {
+                    //System.out.println("LOG \t D");  
+                    isDeltaEmission = true;
+                    isAlphaEmission = false;
+                    isEmissionFreeDay = false;
+                }
+            } else {
+                //System.out.println("LOG \t NOE");
+                isEmissionFreeDay =  true;
+                isDeltaEmission = false;
+                isAlphaEmission = false;
+            }
+            tmpAlphaEmissionClaim = 0;
+            tmpDeltaEmissionClaim = 0;
         }
-        
     }
 }

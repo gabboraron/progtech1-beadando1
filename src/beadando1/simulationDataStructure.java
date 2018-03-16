@@ -15,9 +15,8 @@ public class simulationDataStructure {
         this.plants = plants;
         this.nrOfPlants = nrOfPlants;
         this.nrOfSimulationDays = nrOfSimulationDays;
-        
         //
-        System.out.println("LOG simulationDataStructure-constructor \tplants:"+plants+"\tnrOfPlants:"+nrOfPlants+"\tnrOfSimulationDays:"+nrOfSimulationDays);
+        //System.out.println("LOG@simulationDataStructure-constructor \tplants:"+  plants+"\tnrOfPlants:"+nrOfPlants+"\tnrOfSimulationDays:"+nrOfSimulationDays);
         //
     }
 
