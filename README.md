@@ -8,15 +8,18 @@ sugárzás nélküli.
 Minden növény jellemzői: az egyedi neve (String), a rendelkezésre álló tápanyag mennyisége (egész),  hogy  él-e  (logikai).  A  szimulációban  részt  vevő  növények  fajtái  a  következők: puffancs, deltafa, parabokor.  A  következőkben  megadjuk,  hogy  miként  reagálnak  a különböző  sugárzásokra.  Először  a  tápanyag  változik,  és  ha  a  növény ezután  él,  akkor befolyásolhatja a sugárzást. 
 
 ## Puffancs: 
-    Alfa sugárzás hatására a tápanyag mennyisége kettővel nő, sugárzás mentes napon a  tápanyag  eggyel  csökken,  delta  sugárzás  esetén  a  tápanyag  kettővel  csökken.  Minden esetben  úgy  befolyásolja  a  másnapi  sugárzást,  hogy  10-tápanyag értékben  növeli  az  alfa 
-    sugárzás  bekövetkezését.  Ez  a  fajta  akkor  is  elpusztul,  ha  a  tápanyag  mennyisége  10  fölé emelkedik. 
+    - Alfa sugárzás hatására a tápanyag mennyisége kettővel nő, sugárzás mentes napon a  tápanyag  eggyel  csökken,  delta  sugárzás  esetén  a  tápanyag  kettővel  csökken.  
+    - Minden esetben  úgy  befolyásolja  a  másnapi  sugárzást,  hogy  10-tápanyag értékben  növeli  az  alfa sugárzás  bekövetkezését.  
+    - Ez  a  fajta  akkor  is  elpusztul,  ha  a  tápanyag  mennyisége  10  fölé emelkedik. 
 
 ## Deltafa:
-    Alfa sugárzás hatására a tápanyag mennyisége hárommal csökken, sugárzás nélküli napon  a  tápanyag  eggyel  csökken,  delta  sugárzás  hatására  a  tápanyag  néggyel  nő.  Ha  a tápanyag mennyisége 5-nél kisebb, akkor 4 értékben növeli a delta sugárzás bekövetkezését, 
-    ha 5 és 10 közé esik, akkor 1 értékben növeli a delta sugárzás bekövetkezését, ha 10-nél több, akkor nem befolyásolja a másnapi sugárzást. 
+    - Alfa sugárzás hatására a tápanyag mennyisége hárommal csökken, sugárzás nélküli napon  a  tápanyag  eggyel  csökken,  delta  sugárzás  hatására  a  tápanyag  néggyel  nő.  
+    - Ha  a tápanyag mennyisége 5-nél kisebb, akkor 4 értékben növeli a delta sugárzás bekövetkezését, ha 5 és 10 közé esik, akkor 1 értékben növeli a delta sugárzás bekövetkezését, ha 10-nél több, akkor nem befolyásolja a másnapi sugárzást. 
 
 ## Parabokor:
-    Akár  alfa,  akár  delta  sugárzás  hatására  a  tápanyag  mennyisége  eggyel  nő. Sugárzásnélküli napon a tápanyag eggyel csökken. A másnapi sugárzást nem befolyásolja. 
+    - Akár  alfa,  akár  delta  sugárzás  hatására  a  tápanyag  mennyisége  eggyel  nő. 
+    - Sugárzásnélküli napon a tápanyag eggyel csökken. 
+    - A másnapi sugárzást nem befolyásolja. 
 
 A  program  egy  szövegfájlból  olvassa  be  a  szimuláció  adatait!  Az  első  sorban  a  növények száma szerepel. A következő sorok tartalmazzák a növények adatait szóközökkel elválasztva: a növény nevét, a fajtáját és a kezdetben rendelkezésére álló tápanyag mennyiségét. 
 A fajtát egy karakter azonosít: a – puffancs, d – deltafa, p – parabokor. 
@@ -30,5 +33,6 @@ A növényeket leíró részt követő sorban a szimuláció napjainak száma ad
     Nyúlánk d 3 
     10 
     
+Javaslat:
     
-    (Javaslat:  Hozza  létre  az  absztrakt  növény  osztályt,  amelyből  az  egyes  fajták  osztályait.  A konstruktor paramétere legyen a név és a tápanyag kezdeti mennyisége.  Egy nap elteltére is vezessen  be  művelet(ek)et,  a  visszatérő  érték  adja  meg,  hogy  a  növény  milyen  módon befolyásolja a következő nap sugárzását. A befolyásolás lehet egy egész szám, ami pozitív alfa sugárzás esetén, negatív delta sugárzás esetén, nulla, ha a növény nem befolyásolja a másnapi sugárzást. A végeredmény meghatározásához kell még 2 művelet: él-e a lény, illetve a név lekérdezés.) 
+    Hozza  létre  az  absztrakt  növény  osztályt,  amelyből  az  egyes  fajták  osztályait.  A konstruktor paramétere legyen a név és a tápanyag kezdeti mennyisége.  Egy nap elteltére is vezessen  be  művelet(ek)et,  a  visszatérő  érték  adja  meg,  hogy  a  növény  milyen  módon befolyásolja a következő nap sugárzását. A befolyásolás lehet egy egész szám, ami pozitív alfa sugárzás esetén, negatív delta sugárzás esetén, nulla, ha a növény nem befolyásolja a másnapi sugárzást. A végeredmény meghatározásához kell még 2 művelet: él-e a lény, illetve a név lekérdezés.
