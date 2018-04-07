@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="beadando1">
+  <ClassDiagramComponents>
+    <Class name="Beadando1" package="beadando1" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+        <Method name="readFile" returnType="simulationDataStructure" visibility="public" isStatic="true">
+          <Argument type="String" name="input"/>
+        </Method>
+        <Method name="whichType" returnType="plantType" visibility="public" isStatic="true">
+          <Argument type="String" name="tmpType"/>
+        </Method>
+        <Method name="simulate" returnType="void" visibility="public" isStatic="true">
+          <Argument type="simulationDataStructure" name="allData"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="plant" package="beadando1" visibility="public" xPosition="36.0" yPosition="206.0">
+      <Fields>
+        <Field name="name" type="String" visibility="private"/>
+        <Field name="nutrients" type="int" visibility="private"/>
+        <Field name="alive" type="boolean" visibility="private"/>
+        <Field name="type" type="plantType" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="name"/>
+          <Argument type="int" name="nutrients"/>
+          <Argument type="plantType" name="type"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="logPlant" returnType="void" visibility="public"/>
+        <Method name="setType" returnType="void" visibility="public">
+          <Argument type="plantType" name="type"/>
+        </Method>
+        <Method name="getType" returnType="plantType" visibility="public"/>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="getNutrients" returnType="int" visibility="public"/>
+        <Method name="isAlive" returnType="boolean" visibility="public"/>
+        <Method name="setName" returnType="void" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="setNutrients" returnType="void" visibility="public">
+          <Argument type="int" name="nutrients"/>
+        </Method>
+        <Method name="setAlive" returnType="void" visibility="public">
+          <Argument type="boolean" name="alive"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="simulationDataStructure" package="beadando1" visibility="public" xPosition="931.0" yPosition="78.0">
+      <Fields>
+        <Field name="plants" type="Vector&lt;plant&gt;" visibility="private"/>
+        <Field name="nrOfPlants" type="int" visibility="private"/>
+        <Field name="nrOfSimulationDays" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Vector&lt;plant&gt;" name="plants"/>
+          <Argument type="int" name="nrOfPlants"/>
+          <Argument type="int" name="nrOfSimulationDays"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getPlants" returnType="Vector&lt;plant&gt;" visibility="public"/>
+        <Method name="getNrOfPlants" returnType="int" visibility="public"/>
+        <Method name="getNrOfSimulationDays" returnType="int" visibility="public"/>
+        <Method name="setPlants" returnType="void" visibility="public">
+          <Argument type="Vector&lt;plant&gt;" name="plants"/>
+        </Method>
+        <Method name="setNrOfPlants" returnType="void" visibility="public">
+          <Argument type="int" name="nrOfPlants"/>
+        </Method>
+        <Method name="setNrOfSimulationDays" returnType="void" visibility="public">
+          <Argument type="int" name="nrOfSimulationDays"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Enum name="plantType" package="beadando1" visibility="public" xPosition="450.0" yPosition="150.0">
+      <Literals>
+        <Literal name="PUFFANCS"/>
+        <Literal name="DELTAFA"/>
+        <Literal name="PARABOKOR"/>
+      </Literals>
+    </Enum>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <UseRelation source="beadando1.Beadando1" target="beadando1.simulationDataStructure" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="beadando1.simulationDataStructure" target="beadando1.plant" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="type" source="beadando1.plant" target="beadando1.plantType" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="beadando1.Beadando1" target="beadando1.plantType" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="plants" source="beadando1.simulationDataStructure" target="beadando1.plant" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="beadando1.plant" target="beadando1.plantType" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

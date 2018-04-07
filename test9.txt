@@ -1,0 +1,5 @@
+3
+puf1 a 10 
+pufi2 a 10 
+pufi3 a 10 
+3

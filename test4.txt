@@ -1,0 +1,6 @@
+4
+pufi1 a 7  
+pufi2 a 4  
+pufi3 a 5  
+pufi4 a 6  
+5

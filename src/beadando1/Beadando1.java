@@ -7,11 +7,20 @@ import java.util.Scanner;
 import java.util.Vector;
 
 /**
- * beadando feladat szama: 2
+ * Főprogram<br><br>
+ * Egyéb:<br>
+ * beadando feladat szama: 2 <br>
  * link: http://swap.web.elte.hu/progtech/felad1.pdf
  * @author Burian Sándor
  */
 public class Beadando1 {
+    /**
+     * Főprogram<br>
+     * Beolvassa a bemeneti adatokat, majd szimulálja a folyamatot.<br>
+     * Lekezelt hibák: FileNotFoundException, IOException
+     * @param args String <br> A bementi fájl neve, a fájl kötelezően utf8-bom nélküli kódolású kell legyen!
+     * 
+     */
     public static void main(String[] args) {
         try{
             String tmpInputName;
@@ -29,8 +38,13 @@ public class Beadando1 {
     }
     
     /**
-     *
-     * @param input
+     * Beolvassa a fájl tartalmát, és tárolja egy simulationDataStructure objektumban.<br>
+     * Működése röviden:<br>
+     * A fájl felépítését kihasználva beolvassa és eltárolja egy vectorban a növényeket, és a simulationDataStructure típusban hozzáadja a szimulálandó napook számát, ill a növények számát.<br>
+     * Lekezelt hibák: nem megfelelő karakterkódolású fájl esete
+     * @param input String <br> A bementi fájl neve, a fájl kötelezően utf8-bom nélküli kódolású kell legyen!
+     * @return Egy simulationDataStructure felélpítésű objektumot.
+     * @see simulationDataStructure
      * @throws java.io.FileNotFoundException
      * @throws java.io.IOException
      */
@@ -85,6 +99,14 @@ public class Beadando1 {
 	}
     }
         
+    /**
+     * Visszadja a bemeneti rövidítésnek megfelelő növénytípus felsorolás beli elemét a feladatkiírásban szereplő adatok alapján:<br>
+     *  a – puffancs, d – deltafa,  p – parabokor<br>
+     * Rosszul lekezelt esetek: Minden "a"tól és "d"től különböző értékre parabokort ad, így egy hibás fájl esetén hibás működést eredményezhet!
+     * @param tmpType String, a növény típusának rövidítése.
+     * @return a növény növénytípusának megfelelő elemet a plantType enumból.
+     * @see plantType
+     */
     public static plantType whichType(String tmpType){
         if(tmpType.equals("a")){
             return plantType.PUFFANCS;
@@ -94,6 +116,11 @@ public class Beadando1 {
         return plantType.PARABOKOR;
     }
     
+    /**
+     * A szimulációt végző függvény, a feladat kiírásban szereplő módon értelmezendő.
+     * @param allData simulationDataStructure típusú objektum
+     * @see simulationDataStructure
+     */
     public static void simulate(simulationDataStructure allData){
 //        System.out.println("LOG@simulate");
 //        System.out.println("LOG \t nrOfplants: " + allData.getNrOfPlants());
@@ -112,7 +139,8 @@ public class Beadando1 {
         boolean isDeltaEmission = false;
         boolean isEmissionFreeDay = true;
         
-        System.out.println("NAP \t \u2622 \t NÖVÉNYEK" );
+        //System.out.println("NAP \t \u2622 \t NÖVÉNYEK" );
+        System.out.println("NAP \t SUGÁRZÁS \t NÖVÉNYEK" );
         for (int jdx = 0; jdx < allData.getNrOfSimulationDays(); jdx++ ){
             System.out.print(jdx+1+"   \t ");
             if(isAlphaEmission){

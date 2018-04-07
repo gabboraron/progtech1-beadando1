@@ -1,0 +1,10 @@
+8
+Falánk a 7 
+Sudár d 5 
+Köpcös p 4 
+Nyúlánk d 3
+Falánk2 a 17 
+Sudár2 d 15 
+Köpcös2 p 14 
+Nyúlánk2 d 13 
+35
